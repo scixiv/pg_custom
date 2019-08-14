@@ -1,7 +1,8 @@
 FROM postgres:9.6.12-alpine
-
 MAINTAINER Hardy Wu "hardy0wu@gmail.com"
-RUN apk add --no-cache --virtual .build-deps wget build-base \
+
+RUN set -ex \
+    && apk add --no-cache --virtual .build-deps wget build-base \
     && wget https://github.com/jaiminpan/pg_scws/archive/master.zip \
     && unzip master.zip -d /tmp \
     && rm master.zip \
@@ -10,3 +11,5 @@ RUN apk add --no-cache --virtual .build-deps wget build-base \
     && USE_PGXS=1 make install \
     && apk del .build-deps \
     && rm -rf /tmp/pg_scws-master
+
+COPY scws.sql /docker-entrypoint-initdb.d

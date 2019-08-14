@@ -1,5 +1,5 @@
 
 
 ```
-docker build -f Dockerfile-pg -t scixiv/pg_custom:0.1.0 .
+docker build -t scixiv/pg_custom .
 ```
